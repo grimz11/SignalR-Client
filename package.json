@@ -2,19 +2,48 @@
   "name": "client-signalr",
   "version": "0.1.0",
   "private": true,
+  "main": "./public/electron.js",
   "dependencies": {
+    "@aspnet/signalr": "^1.1.4",
+    "@microsoft/signalr": "^3.1.6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "electron-windows-badge": "^1.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "universal-cookie": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:desktop": "electron ./build/electron.js"
+  },
+  "build": {
+    "appId": "nonExistentID",
+    "win": {
+      "target": "nsis",
+      "icon": "build/desktop-icon.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "build/desktop-icon.png"
+    },
+    "files": [
+      "build/**/*",
+      "package.json",
+      "electron.js",
+      "./electron/electron.js"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "release/"
+    },
+    "extends": null
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +59,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^9.2.0",
+    "electron-builder": "^22.8.0"
   }
 }
